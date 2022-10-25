@@ -10,7 +10,7 @@
 
 ## 🔗 Live Link - [Accordion](https://fsjs-accordion-component.netlify.app/)
 
-## Demo
+## 🪧 Demo
 
 ![Accordion](https://www.linkpicture.com/q/Screenshot-2022-10-25-095342.png)
 
