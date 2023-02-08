@@ -19,50 +19,52 @@ const faqData = [
 ];
 
 const accordianBody = document.querySelector(".accordian_body");
+let faqs = [];
 
-// Creating FAQ
-const createFaq = (faqQue, faqAns) => {
-  let faqDiv = document.createElement("div");
-  faqDiv.classList.add("faq");
-  accordianBody.appendChild(faqDiv);
+// Creating new FAQ and adding it to FAQS array
+faqData.forEach((faq) => {
+  let newFaq = createFaq(faq.question, faq.answer);
+  faqs.push(newFaq);
+});
 
-  let faqHeaderDiv = document.createElement("div");
-  faqHeaderDiv.classList.add("faq_header");
-  faqDiv.appendChild(faqHeaderDiv);
-
-  let faqHeading = document.createElement("h3");
-  faqHeading.textContent = faqQue;
-  faqHeaderDiv.appendChild(faqHeading);
-
-  let faqBtn = document.createElement("button");
-  faqBtn.classList.add("show_btn");
-  faqHeaderDiv.appendChild(faqBtn);
-
-  let faqAnswer = document.createElement("p");
-  faqAnswer.textContent = faqAns;
-  faqAnswer.classList.add("hidden");
-  faqDiv.appendChild(faqAnswer);
-};
-
-const showFaq = () => {
-  faqData.forEach((faq) => {
-    createFaq(faq.question, faq.answer);
-  });
-};
-
-showFaq();
-
-function btnStatusUpdate(btn) {
-  btn.classList.toggle("activeBtn");
-}
-
-const faqBtns = document.querySelectorAll(".show_btn");
-
-// Event Listner
-faqBtns.forEach((faqBtn) => {
+// showBtn
+faqs.forEach((faq) => {
+  const faqBtn = faq.faqBtn;
   faqBtn.addEventListener("click", () => {
-    btnStatusUpdate(faqBtn);
-    const ansElement = faqBtn.parentElement.parentElement.lastChild;
-    ansElement.classList.toggle("hidden");
+    faq.faqBody.classList.toggle("hidden");
+    btnStatusUpdate(faq.faqBtn);
   });
 });
+
+// createFaq
+function createFaq(faqHeaderText, faqBodyText) {
+  const faqEl = document.createElement("div");
+  faqEl.classList.add("faq");
+  accordianBody.appendChild(faqEl);
+  const faqHeader = document.createElement("div");
+  faqHeader.classList.add("faq_header");
+  faqEl.appendChild(faqHeader);
+
+  const faqTitle = document.createElement("h3");
+  faqTitle.innerText = faqHeaderText;
+  faqHeader.appendChild(faqTitle);
+  const faqBtn = document.createElement("button");
+  faqBtn.classList.add("show_btn");
+  faqBtn.innerText = "+";
+  faqHeader.appendChild(faqBtn);
+
+  const faqBody = document.createElement("p");
+  faqBody.innerText = faqBodyText;
+  faqBody.classList.add("hidden");
+  faqEl.appendChild(faqBody);
+
+  return {
+    faqBody,
+    faqBtn,
+  };
+}
+
+// btnStatusUpdate
+function btnStatusUpdate(faqBtn) {
+  faqBtn.innerText == "+" ? (faqBtn.innerText = "-") : (faqBtn.innerText = "+");
+}

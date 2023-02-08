@@ -48,17 +48,6 @@
   margin: 0em;
   border-radius: 120px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.show_btn::after {
-  content: "+";
-}
-
-.activeBtn::after {
-  content: "-";
 }
 
 .hidden {
